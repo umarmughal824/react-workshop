@@ -14,27 +14,38 @@ class TemperatureCalculator extends Component {
 
     this.state = {
       temperature: '',
+      ftemperature: '',
     };
 
-    this.onTempChange = this.setTemperature.bind(this);
+    this.setTemperature = this.setTemperature.bind(this);
   }
 
   setTemperature(temperature) {
+
     this.setState({
       temperature,
+    });
+    
+    if(temperature === '')
+      temperature = '';
+    else
+      temperature = temperature * (9/5) + 32;
+  
+    this.setState({
+      ftemperature: temperature,        
     });
   }
 
   render() {
-    const { temperature } = this.state;
-
+    const { temperature, ftemperature } = this.state;
+    
     return (
         <section className="lesson-calculator info-panel">
           <h2>Temperature Calculator</h2>
 
           <div className="form-holder">
-            <TempInput unit={TEMP_UNITS.CELSIUS} onChange={this.setTemperature} />
-            <TempInput unit={TEMP_UNITS.FARHENHEIT} onChange={this.setTemperature} />
+            <TempInput temperature={temperature} unit={TEMP_UNITS.CELSIUS} onChange={this.setTemperature} />
+            <TempInput temperature={ftemperature} unit={TEMP_UNITS.FARHENHEIT} onChange={this.setTemperature} />
             <BoilingNotice temperature={temperature}/>
           </div>
 

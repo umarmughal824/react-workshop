@@ -18,7 +18,10 @@ class TempInput extends Component {
       temperature: event.target.value,
     });
 
-    this.props.onChange(event.target.value);
+    let convertedValue = event.target.value;
+    if(this.state.unit == 'Farhenheit')
+      convertedValue = (convertedValue - 32) / 1.8;
+    this.props.onChange(convertedValue);
   }
 
   render() {
@@ -29,7 +32,7 @@ class TempInput extends Component {
           <label>Enter Temperature in {unit}</label>
           <input
               placeholder={`Enter value in ${unit}`}
-              value={temperature}
+              value={this.props.temperature}
               onChange={this.changeHandler}
           />
         </fieldset>
