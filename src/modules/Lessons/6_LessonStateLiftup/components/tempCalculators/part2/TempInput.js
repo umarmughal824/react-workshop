@@ -24,6 +24,20 @@ class TempInput extends Component {
     this.props.onChange(convertedValue);
   }
 
+
+  componentWillReceiveProps(nextProps) {
+    console.log('...componentWillReceiveProps...');
+    /*
+      - Listen to changes in prop and update the state of component IF the data (countries or fontColor) has changed
+      - remember to also update the isLoading state accordingly
+    */
+    if(nextProps.temperature != null && this.state.temperature !== nextProps.temperature)
+      this.setState({
+        temperature: nextProps.temperature,
+      });
+  }
+
+
   render() {
     const { temperature, unit } = this.state;
 
@@ -32,7 +46,7 @@ class TempInput extends Component {
           <label>Enter Temperature in {unit}</label>
           <input
               placeholder={`Enter value in ${unit}`}
-              value={this.props.temperature}
+              value={temperature}
               onChange={this.changeHandler}
           />
         </fieldset>
