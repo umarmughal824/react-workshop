@@ -18,18 +18,13 @@ class TempInput extends Component {
       temperature: event.target.value,
     });
 
-    let convertedValue = event.target.value;
-    if(this.state.unit == 'Farhenheit')
-      convertedValue = (convertedValue - 32) / 1.8;
-    this.props.onChange(convertedValue);
+    this.props.onChange(event.target.value, this.state.unit);
   }
 
 
   componentWillReceiveProps(nextProps) {
-    console.log('...componentWillReceiveProps...');
     /*
-      - Listen to changes in prop and update the state of component IF the data (countries or fontColor) has changed
-      - remember to also update the isLoading state accordingly
+      - Listen to changes in prop and update the state of component
     */
     if(nextProps.temperature != null && this.state.temperature !== nextProps.temperature)
       this.setState({

@@ -20,19 +20,18 @@ class TemperatureCalculator extends Component {
     this.setTemperature = this.setTemperature.bind(this);
   }
 
-  setTemperature(temperature) {
-
-    this.setState({
-      temperature,
-    });
+  setTemperature(temperature, unit) {
+    let ftemperature = temperature;
     
-    if(temperature === '')
-      temperature = '';
-    else
-      temperature = temperature * (9/5) + 32;
+    if(temperature !== '')
+      if(unit === 'Celsius')
+        ftemperature = temperature * 1.8 + 32;
+      else
+        temperature = (temperature - 32) / 1.8;
   
     this.setState({
-      ftemperature: temperature,        
+      temperature,
+      ftemperature,
     });
   }
 
