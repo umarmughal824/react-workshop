@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class DataView extends Component{
-  constructor(props){
-    super(props);
-
-    this.state = {
-      countries: props.countries,
-    }
-  }
-
-  render(){
-  	const { countries } = this.state;
-
-    return (
+const DataView = ({countries}) => {
+  return (
 	  <ul className="countries-list">
 	  	{
 	  	  countries.map((country, index) => <li key={index}>{country.label}</li>)
 	  	}
 	  </ul>
-	);
-  }
+  );
 }
+
+DataView.propTypes = {
+  countries: PropTypes.object,
+};
 
 export default DataView;
