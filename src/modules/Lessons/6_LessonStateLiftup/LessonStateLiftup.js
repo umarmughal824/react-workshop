@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Intro from './components/StateLiftupIntro';
-import TemperatureCalculator from './components/tempCalculators/part1/TemperatureCalculator';
+// import TemperatureCalculator from './components/tempCalculators/part1/TemperatureCalculator';
+import TemperatureCalculator from './components/tempCalculators/part2/TemperatureCalculator';
 
 import './LessonStateLiftup.css';
 

@@ -18,8 +18,20 @@ class TempInput extends Component {
       temperature: event.target.value,
     });
 
-    this.props.onChange(event.target.value);
+    this.props.onChange(event.target.value, this.state.unit);
   }
+
+
+  componentWillReceiveProps(nextProps) {
+    /*
+      - Listen to changes in prop and update the state of component
+    */
+    if(nextProps.temperature != null && this.state.temperature !== nextProps.temperature)
+      this.setState({
+        temperature: nextProps.temperature,
+      });
+  }
+
 
   render() {
     const { temperature, unit } = this.state;
