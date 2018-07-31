@@ -6,6 +6,7 @@ import RadioButtonField from './RadioButtonField';
 import CheckBoxField from './CheckBoxField';
 import Dropdown from '../../../common/components/Dropdown';
 import Saving from './Saving';
+import Countries from '../../../../util/countries.js'
 
 class UserForm extends Component{
 	constructor(props){
@@ -15,10 +16,11 @@ class UserForm extends Component{
 			name: '',
 			gender: '',
 			education: '',
-			country: '',
+			country: Countries[0].label,
 			isSaving: false
 		}
 		this.onChange = this.onChange.bind(this);
+		this.onSelectChange = this.onSelectChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -27,6 +29,16 @@ class UserForm extends Component{
 		this.setState({
 			[event.target.name]: [event.target.value]
 		});
+	}
+
+	onSelectChange(event){
+		console.log('...onSelectChange...');
+		var index = event.nativeEvent.target.selectedIndex;
+		console.log(event.target.name+' = '+event.nativeEvent.target[index].text);
+
+		this.setState({
+			[event.target.name]: event.nativeEvent.target[index].text
+		});		
 	}
 
 	handleSubmit(event){
@@ -60,7 +72,7 @@ class UserForm extends Component{
 						<CheckBoxField label="Education" name="education" value={education} onChange={this.onChange} />
 					</fieldset>
 					<fieldset>
-						<Dropdown label="Country" name="country" value={country} onChange={this.onChange} />
+						<Dropdown label="Country" name="country" value={country} onChange={this.onSelectChange} />
 					</fieldset>
 					<input type="submit" value="Sign Up" />
 				</form>

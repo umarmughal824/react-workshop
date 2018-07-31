@@ -10,7 +10,7 @@ class Dropdown extends Component{
 			countries: Countries,
 			label: props.label,
 			name: props.name,
-			value: props.value,
+			value: props.country,
 		};
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 	}
@@ -29,7 +29,7 @@ class Dropdown extends Component{
 		return(
 		  <label>
 		  	<strong>{label}</strong> &nbsp;
-			<select name={this.name} onChange={this.onChangeHandler}>
+			<select name={name} onChange={this.onChangeHandler}>
 				{
 	            	countries.map(country => 
 	            	<option value={country.value}>{country.label}</option>)
