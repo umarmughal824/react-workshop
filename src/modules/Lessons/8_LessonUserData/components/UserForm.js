@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../../../common/components/TextInput';
 import RadioButtonField from './RadioButtonField';
 import CheckBoxField from './CheckBoxField';
+import Dropdown from '../../../common/components/Dropdown';
 import Saving from './Saving';
 
 class UserForm extends Component{
@@ -59,6 +60,7 @@ class UserForm extends Component{
 						<CheckBoxField label="Education" name="education" value={education} onChange={this.onChange} />
 					</fieldset>
 					<fieldset>
+						<Dropdown label="Country" name="country" value={country} onChange={this.onChange} />
 					</fieldset>
 					<input type="submit" value="Sign Up" />
 				</form>
