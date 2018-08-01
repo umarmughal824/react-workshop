@@ -13,13 +13,12 @@ class GitDashboard extends Component {
     this.state = {
       data: null,
       isLoading: true,
-      view: 'users'
+      current_page: 'users'
     };
   }
 
   componentWillMount(){
     console.log('...componentWillMount...');
-    setTimeout(function(){
       axios.get("https://api.github.com/users")
         .then(({data}) => {
           console.log(data);
@@ -32,7 +31,6 @@ class GitDashboard extends Component {
         .catch(function (error){
 
         });
-    }, 5000);
   }
 
   getCurrentView(){
@@ -44,7 +42,7 @@ class GitDashboard extends Component {
       view = "Loading ..."
     }
     else{
-      view = <GithubUserList users={data}/>
+        view = <GithubUserList users={data}/>
     }
     return view;
   }

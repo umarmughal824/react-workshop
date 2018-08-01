@@ -1,8 +1,12 @@
 import React from 'react';
 
-const UserDetail = () => {
+const UserDetail = ({user}) => {
 	return (
-		<div>User Detail</div>
+	<span>		
+		Login: <span>"{user.login}"</span> &nbsp;
+		Url: <a href={user.html_url}>{user.login}</a> &nbsp;
+		Type: <span>{user.type} { user.site_admin ? <strong>/ Admin </strong> : ""}</span>
+	</span>
 	);
 }
 

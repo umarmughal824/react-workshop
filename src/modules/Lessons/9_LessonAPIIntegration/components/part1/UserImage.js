@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserImage = (image) => {
+const UserImage = ({image}) => {
 	return(
 		<img src={image} />
 	);

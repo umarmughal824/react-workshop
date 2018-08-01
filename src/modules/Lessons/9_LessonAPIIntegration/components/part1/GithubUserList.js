@@ -11,7 +11,7 @@ const GithubUserList = ({users}) => {
 		{
 			users.map(user => <div>
 				<UserImage image={user.avatar_url} />
-				<UserDetail />
+				<UserDetail user={user} />
 				<UserReposButton />	
 				</div>
 			)
