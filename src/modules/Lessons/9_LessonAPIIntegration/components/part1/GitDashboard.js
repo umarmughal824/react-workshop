@@ -12,8 +12,7 @@ class GitDashboard extends Component {
 
     this.state = {
       data: null,
-      isLoading: true,
-      current_page: 'users'
+      isLoading: true
     };
   }
 
@@ -54,7 +53,7 @@ class GitDashboard extends Component {
       <div>
         <h4>Git Dashboard</h4>
         <TextInput name="search" placeholder="Search"/> <br/>
-        <Label title="Showing All Results" /><br/>
+        <Label title="Showing All Results" /><br/><br/><br/>
         {page}
       </div>
     );

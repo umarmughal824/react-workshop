@@ -1,8 +1,8 @@
 import React from 'react';
 
-const UserReposButton = () => {
+const UserReposButton = ({value, onClick}) => {
 	return (
-		<button>View Repositories</button>
+		<button value={value} onClick={onClick} >View Repositories</button>
 	);
 }
 
