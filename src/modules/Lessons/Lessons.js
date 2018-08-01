@@ -32,7 +32,7 @@ class Lessons extends Component {
 
 
     this.state = {
-      activeLesson: LESSON_TYPES.USER_DATA,
+      activeLesson: LESSON_TYPES.API_INTEGRATION,
     };
   }
 
