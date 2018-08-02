@@ -15,9 +15,19 @@ class GithubUserList extends Component{
 			users: props.users,
 			repos: null,
 			isLoading: false,
-	        current_page: 'users'
+      current_page: 'users'
 		};
 		this.onClick = this.onClick.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps){
+		console.log('...componentWillRecieveProps...', nextProps);
+		if(nextProps.users !== this.state.users){
+			this.setState({
+				 ...this.state,
+				users: nextProps.users
+			});
+		}
 	}
 	
 	onClick(event){

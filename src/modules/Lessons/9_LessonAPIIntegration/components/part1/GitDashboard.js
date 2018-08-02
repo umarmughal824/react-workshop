@@ -12,8 +12,12 @@ class GitDashboard extends Component {
 
     this.state = {
       data: null,
-      isLoading: true
+      search_data: null,
+      isLoading: true,
+      value: ""
     };
+    this.onChange = this.onChange.bind(this);
+    this.searchByKeyValue = this.searchByKeyValue.bind(this);
   }
 
   componentWillMount(){
@@ -25,7 +29,6 @@ class GitDashboard extends Component {
             data,
             isLoading: !this.state.isLoading
           });
-          console.log('state set done');
         })
         .catch(function (error){
 
@@ -33,26 +36,55 @@ class GitDashboard extends Component {
   }
 
   getCurrentView(){
-    const { data, isLoading } = this.state;
+    const { data, search_data, isLoading } = this.state;
     let view = null;
 
-    console.log(`isLoading= ${isLoading}`);
     if(isLoading){
       view = "Loading ..."
     }
     else{
+      if(search_data){
+        view = <GithubUserList users={search_data}/>
+      }
+      else{
         view = <GithubUserList users={data}/>
+      }
     }
     return view;
   }
 
+  onChange(event){
+    // console.log(event.target.value);
+    this.searchByKeyValue(event.target.value);
+  }
+
+  searchByKeyValue(q){
+    if(q === ""){
+      this.setState({
+         ...this.state,
+         isLoading: false,
+         search_data: null
+      });
+    }
+    else{
+      let searched_data = [];
+      const { data } = this.state;
+      const searched = data.find(function (obj){ if(obj.login.indexOf(q) !== -1) searched_data.push(obj) });
+      // console.log(searched_data);
+      this.setState({
+          ...this.state,
+         search_data: searched_data,
+         isLoading: false,
+      });
+    }
+  }
+
   render() {
-    console.log('render');
     const page = this.getCurrentView();
     return (
       <div>
         <h4>Git Dashboard</h4>
-        <TextInput name="search" placeholder="Search"/> <br/>
+        <TextInput name="search" placeholder="Search" onChange={this.onChange}/> <br/>
         <Label title="Showing All Results" /><br/><br/><br/>
         {page}
       </div>
