@@ -15,18 +15,29 @@ class GithubUserList extends Component{
 			users: props.users,
 			repos: null,
 			isLoading: false,
-      current_page: 'users'
+      		current_page: 'users',
+      		setRepoData: props.setRepoData
 		};
-		this.onClick = this.onClick.bind(this);
+		this.onClick = this.onClick.bind(this); 
 	}
 
 	componentWillReceiveProps(nextProps){
 		console.log('...componentWillRecieveProps...', nextProps);
-		if(nextProps.users !== this.state.users){
-			this.setState({
-				 ...this.state,
-				users: nextProps.users
-			});
+		if(current_page == 'users'){
+			if(nextProps.users !== this.state.users){
+				this.setState({
+					 ...this.state,
+					users: nextProps.users
+				});
+			}
+		}
+		else{
+			if(nextProps.repos !== this.state.users){
+				this.setState({
+					 ...this.state,
+					repos: nextProps.users
+				});
+			}
 		}
 	}
 	
@@ -36,13 +47,14 @@ class GithubUserList extends Component{
 		});
 		const username = event.target.value;
 		const link = `https://api.github.com/users/${username}/repos`
-      axios.get(link)
+        axios.get(link)
         .then(({data}) => {
           this.setState({
             repos: data,
             isLoading: !this.state.isLoading,
             current_page: 'repos'
           });
+          this.state.setRepoData(data);
         })
         .catch(function (error){
 

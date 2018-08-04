@@ -14,10 +14,12 @@ class GitDashboard extends Component {
       data: null,
       search_data: null,
       isLoading: true,
+      isRepoPage: false,
       value: ""
     };
     this.onChange = this.onChange.bind(this);
     this.searchByKeyValue = this.searchByKeyValue.bind(this);
+    this.setRepoData = this.setRepoData.bind(this);
   }
 
   componentWillMount(){
@@ -26,6 +28,7 @@ class GitDashboard extends Component {
         .then(({data}) => {
           console.log(data);
           this.setState({
+             ...this.state,
             data,
             isLoading: !this.state.isLoading
           });
@@ -33,6 +36,14 @@ class GitDashboard extends Component {
         .catch(function (error){
 
         });
+  }
+
+  setRepoData(data){
+    this.setState({
+       ...this.state,
+      data,
+      isRepoPage: true
+    });
   }
 
   getCurrentView(){
@@ -44,10 +55,10 @@ class GitDashboard extends Component {
     }
     else{
       if(search_data){
-        view = <GithubUserList users={search_data}/>
+        view = <GithubUserList users={search_data} setRepoData={this.setRepoData}/>
       }
       else{
-        view = <GithubUserList users={data}/>
+        view = <GithubUserList users={data} setRepoData={this.setRepoData}/>
       }
     }
     return view;
@@ -68,8 +79,22 @@ class GitDashboard extends Component {
     }
     else{
       let searched_data = [];
-      const { data } = this.state;
-      const searched = data.find(function (obj){ if(obj.login.indexOf(q) !== -1) searched_data.push(obj) });
+      const { data, isRepoPage } = this.state;
+
+      const searched = data.find(function (obj){ 
+        
+        console.log(obj);
+        if(isRepoPage){
+          console.log('isRepoPage', true);
+          console.log('obj.name.indexOf(q)', obj.name.indexOf(q));
+          if(obj.name.indexOf(q) !== -1){
+            searched_data.push(obj)
+          }
+        }
+        else
+          if(obj.login.indexOf(q) !== -1) 
+            searched_data.push(obj)
+      });
       // console.log(searched_data);
       this.setState({
           ...this.state,
