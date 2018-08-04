@@ -23,6 +23,7 @@ class GithubUserList extends Component{
 
 	componentWillReceiveProps(nextProps){
 		console.log('...componentWillRecieveProps...', nextProps);
+		const { current_page } = this.state;
 		if(current_page == 'users'){
 			if(nextProps.users !== this.state.users){
 				this.setState({
