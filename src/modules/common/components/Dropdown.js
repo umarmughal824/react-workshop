@@ -16,10 +16,8 @@ class Dropdown extends Component{
 	}
 
 	onChangeHandler(event){
-		var index = event.nativeEvent.target.selectedIndex;
-
 		this.setState({
-			value: event.nativeEvent.target[index].text
+			value: event.target.value
 		});
 		this.props.onChange(event);
 	}
@@ -32,7 +30,7 @@ class Dropdown extends Component{
 			<select name={name} onChange={this.onChangeHandler}>
 				{
 	            	countries.map(country => 
-	            	<option value={country.value}>{country.label}</option>)
+	            	<option key={country.label} value={country.value}>{country.label}</option>)
 	            }
 			</select>
 	      </label>

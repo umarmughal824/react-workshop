@@ -8,6 +8,7 @@ class RadioButton extends Component{
 			label: props.label,
 			name: props.name,
 			value: props.value,
+			options: props.options
 		};
 		this.onChangeSubHandler = this.onChangeSubHandler.bind(this);
 	}
@@ -16,14 +17,21 @@ class RadioButton extends Component{
 		this.setState({
 			value: event.target.value
 		});
-		this.props.onChangeHandler(event);
+		this.props.onChange(event);
 	}
 
 	render(){
-		const { name, value } = this.state;
+		const { name, value, options } = this.state;
 		return(
-	      <input type="radio" name={name} value={value} 
-	      onChange={this.onChangeSubHandler} />
+			<span>
+			{
+				options.map(option => <span key={option.key}>
+					<input type="radio" name={name} value={option.key} onChange={this.onChangeSubHandler} />
+					 {option.value}
+					</span>
+				)
+			}
+			</span>
 		);
 	}
 }
