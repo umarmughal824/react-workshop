@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TextInput from '../../../common/components/TextInput';
-// import RadioButtonField from './RadioButtonField';
 import RadioButton from '../../../common/components/RadioButton';
 import CheckBox from '../../../common/components/CheckBox';
-// import CheckBoxField from './CheckBoxField';
 import Dropdown from '../../../common/components/Dropdown';
 import Saving from './Saving';
 import Countries from '../../../../util/countries.js'
+import Genders from '../../../../util/genders.js'
+import Educations from '../../../../util/educations.js'
 
 class UserForm extends Component{
 	constructor(props){
@@ -20,10 +20,8 @@ class UserForm extends Component{
 			education: [],
 			country: Countries[0].label,
 			isSaving: false,
-			radioButtonOptions: [{key:'male', value: 'Male'}, 
-			{key:'female', value: 'Female'}],
-			checkBoxOptions: [{key:'grad', value: 'Graduation'}, 
-			{key:'postgrad', value: 'Post Graduate'}],
+			radioButtonOptions: Genders,
+			checkBoxOptions: Educations,
 		}
 		this.onChange = this.onChange.bind(this);
 		this.onSelectChange = this.onSelectChange.bind(this);
