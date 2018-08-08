@@ -8,6 +8,7 @@ class CheckBox extends Component{
 			label: props.label,
 			name: props.name,
 			value: props.value,
+			options: props.options
 		};
 		this.onChangeSubHandler = this.onChangeSubHandler.bind(this);
 	}
@@ -20,10 +21,17 @@ class CheckBox extends Component{
 	}
 
 	render(){
-		const { name, value } = this.state;
+		const { name, value, options } = this.state;
 		return(
-	      <input type="checkbox" name={name} value={value} 
-	      onChange={this.onChangeSubHandler} />
+			<div>
+			{
+			options.map(option => <span key={option.key}>
+				<input type="checkbox" name={name} value={option.key} 
+	      onChange={this.onChangeSubHandler} /> { option.value}
+				<br/></span>
+			)
+			}
+			</div>
 		);
 	}
 }

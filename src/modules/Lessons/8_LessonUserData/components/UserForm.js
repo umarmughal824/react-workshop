@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TextInput from '../../../common/components/TextInput';
-import RadioButtonField from './RadioButtonField';
-import CheckBoxField from './CheckBoxField';
+import RadioButton from '../../../common/components/RadioButton';
+import CheckBox from '../../../common/components/CheckBox';
 import Dropdown from '../../../common/components/Dropdown';
 import Saving from './Saving';
 import Countries from '../../../../util/countries.js'
+import Genders from '../../../../util/genders.js'
+import Educations from '../../../../util/educations.js'
 
 class UserForm extends Component{
 	constructor(props){
@@ -15,9 +17,11 @@ class UserForm extends Component{
 		this.state = {
 			name: '',
 			gender: '',
-			education: '',
+			education: [],
 			country: Countries[0].label,
-			isSaving: false
+			isSaving: false,
+			radioButtonOptions: Genders,
+			checkBoxOptions: Educations,
 		}
 		this.onChange = this.onChange.bind(this);
 		this.onSelectChange = this.onSelectChange.bind(this);
@@ -25,19 +29,30 @@ class UserForm extends Component{
 	}
 
 	onChange(event){
+		var type = event.target.getAttribute('type');
 		console.log('...onChange...');
-		this.setState({
-			[event.target.name]: [event.target.value]
-		});
+		if(type == 'checkbox'){
+			var checkboxes = document.getElementsByName("education");
+			var values = []
+			for(var i=0; i <checkboxes.length; i++){
+				if(checkboxes[i].checked)
+					values.push(checkboxes[i].value);
+			}
+			this.setState({
+				[event.target.name]: values
+			});			
+		}
+		else{
+			this.setState({
+				[event.target.name]: [event.target.value]
+			});
+		}
 	}
 
 	onSelectChange(event){
 		console.log('...onSelectChange...');
-		var index = event.nativeEvent.target.selectedIndex;
-		console.log(event.target.name+' = '+event.nativeEvent.target[index].text);
-
 		this.setState({
-			[event.target.name]: event.nativeEvent.target[index].text
+			[event.target.name]: event.target.value
 		});		
 	}
 
@@ -45,7 +60,7 @@ class UserForm extends Component{
 		event.preventDefault(event);
 
 		this.setState({
-			isSaving: true
+			isSaving: false
 		});
 		console.log('...handleSubmit...');
 		console.log("Submitted Data");
@@ -56,7 +71,7 @@ class UserForm extends Component{
 	}
 
 	render(){
-		const { name, gender, education, country, isSaving } = this.state;
+		const { name, gender, education, country, isSaving, radioButtonOptions, checkBoxOptions } = this.state;
 		
 		return(
 			<div>
@@ -66,10 +81,15 @@ class UserForm extends Component{
 						onChange={this.onChange} placeholder="Enter your name" />
 					</fieldset>
 					<fieldset>
-						<RadioButtonField label="Gender" name="gender" value={gender} onChange={this.onChange} />
+						<label><strong>Gender</strong> &nbsp;
+						<RadioButton name="gender" value={gender} options={radioButtonOptions} onChange={this.onChange} />
+						</label>
 					</fieldset>
 					<fieldset>
-						<CheckBoxField label="Education" name="education" value={education} onChange={this.onChange} />
+					  <label>
+					  	<strong>Education</strong> &nbsp; <br/>
+						<CheckBox name="education" value="graduation" options={checkBoxOptions} onChangeHandler={this.onChange}/>
+					  </label>
 					</fieldset>
 					<fieldset>
 						<Dropdown label="Country" name="country" value={country} onChange={this.onSelectChange} />
