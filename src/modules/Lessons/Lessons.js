@@ -36,37 +36,37 @@ class Lessons extends Component {
     };
   }
 
-  toggleLesson(lesson) {
-    this.setState({
-      activeLesson: lesson,
-    });
-  }
+  // toggleLesson(lesson) {
+  //   this.setState({
+  //     activeLesson: lesson,
+  //   });
+  // }
 
 
-  renderActiveLesson = (type) => {
-    switch (type) {
-      case LESSON_TYPES.JSX:
-        return <LessonJSX title={LESSON_TYPES.JSX} />;
-      case LESSON_TYPES.REACT_ELEMENTS:
-        return <LessonElements title={LESSON_TYPES.REACT_ELEMENTS} />;
-      case LESSON_TYPES.COMP_PROPS:
-        return <LessonCompProps title={LESSON_TYPES.COMP_PROPS} />;
-      case LESSON_TYPES.STATE_LIFEHOOKS:
-        return <LessonStateLifeHooks title={LESSON_TYPES.STATE_LIFEHOOKS} />;
-      case LESSON_TYPES.CONDITIONAL_RENDERS:
-        return <LessonConditionalRenders title={LESSON_TYPES.CONDITIONAL_RENDERS} />;
-      case LESSON_TYPES.STATE_LIFTUP:
-        return <LessonStateLiftup title={LESSON_TYPES.STATE_LIFTUP} />;
-      case LESSON_TYPES.CONTAINER_PRESENT:
-        return <LessonContainerPresentational title={LESSON_TYPES.CONTAINER_PRESENT} />;
-      case LESSON_TYPES.USER_DATA:
-        return <LessonUserData title={LESSON_TYPES.USER_DATA} />;
-      case LESSON_TYPES.API_INTEGRATION:
-        return <LessonAPIIntegration title={LESSON_TYPES.API_INTEGRATION} />;
-      default:
-        return null;
-    }
-  };
+  // renderActiveLesson = (type) => {
+  //   switch (type) {
+  //     case LESSON_TYPES.JSX:
+  //       return <LessonJSX title={LESSON_TYPES.JSX} />;
+  //     case LESSON_TYPES.REACT_ELEMENTS:
+  //       return <LessonElements title={LESSON_TYPES.REACT_ELEMENTS} />;
+  //     case LESSON_TYPES.COMP_PROPS:
+  //       return <LessonCompProps title={LESSON_TYPES.COMP_PROPS} />;
+  //     case LESSON_TYPES.STATE_LIFEHOOKS:
+  //       return <LessonStateLifeHooks title={LESSON_TYPES.STATE_LIFEHOOKS} />;
+  //     case LESSON_TYPES.CONDITIONAL_RENDERS:
+  //       return <LessonConditionalRenders title={LESSON_TYPES.CONDITIONAL_RENDERS} />;
+  //     case LESSON_TYPES.STATE_LIFTUP:
+  //       return <LessonStateLiftup title={LESSON_TYPES.STATE_LIFTUP} />;
+  //     case LESSON_TYPES.CONTAINER_PRESENT:
+  //       return <LessonContainerPresentational title={LESSON_TYPES.CONTAINER_PRESENT} />;
+  //     case LESSON_TYPES.USER_DATA:
+  //       return <LessonUserData title={LESSON_TYPES.USER_DATA} />;
+  //     case LESSON_TYPES.API_INTEGRATION:
+  //       return <LessonAPIIntegration title={LESSON_TYPES.API_INTEGRATION} />;
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   render() {
     const { activeLesson } = this.state;
@@ -80,14 +80,12 @@ class Lessons extends Component {
                         className={classnames({'lesson-item': true, active: LESSON_TYPES[aLesson] === activeLesson })}
                         href="javascript:void(0);"
                         onClick={this.toggleLesson.bind(this, LESSON_TYPES[aLesson])}>
-                      {LESSON_TYPES[aLesson]}
                       </a>
                   </li>)
               }
             </ul>
           </aside>
           <div className="lesson-body">
-            {this.renderActiveLesson(activeLesson)}
           </div>
         </div>
     );
