@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-// import Lessons from './modules/Lessons/Lessons'
+import Lessons from './modules/Lessons/Lessons'
 import LessonJSX from './modules/Lessons/1_LessonJSX/LessonJSX';
 import LessonElements from './modules/Lessons/2_LessonElements/LessonElements';
 import LessonCompProps from './modules/Lessons/3_LessonCompProps/LessonCompProps';
@@ -14,7 +14,8 @@ import LessonAPIIntegration from './modules/Lessons/9_LessonAPIIntegration/Lesso
 
 export default (
 	<Switch>
-		<Route path="/" exact component={LessonJSX}/>
+		<Route path="/" exact component={Lessons}/>
+		<Route path="/jsx" component={LessonJSX}/>
 		<Route path="/elements" component={LessonElements}/>
 		<Route path="/comp-props" component={LessonCompProps}/>
 		<Route path="/lifecycle-hooks" component={LessonStateLifeHooks}/>
