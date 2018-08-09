@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import Lessons from './modules/Lessons/Lessons'
+// import Lessons from './modules/Lessons/Lessons'
 import LessonJSX from './modules/Lessons/1_LessonJSX/LessonJSX';
 import LessonElements from './modules/Lessons/2_LessonElements/LessonElements';
 import LessonCompProps from './modules/Lessons/3_LessonCompProps/LessonCompProps';
@@ -14,15 +14,14 @@ import LessonAPIIntegration from './modules/Lessons/9_LessonAPIIntegration/Lesso
 
 export default (
 	<Switch>
-		<Route path="/" exact controller={Lessons}/>
-		<Route path="/jsx" controller={LessonJSX}/>
-		<Route path="/elements" controller={LessonElements}/>
-		<Route path="/comp-props" controller={LessonCompProps}/>
-		<Route path="/lifecycle-hooks" controller={LessonStateLifeHooks}/>
-		<Route path="/conditional-renders" controller={LessonConditionalRenders}/>
-		<Route path="/state-lift-up" controller={LessonStateLiftup}/>
-		<Route path="/container-presentational" controller={LessonContainerPresentational}/>
-		<Route path="/user-data" controller={LessonUserData}/>
-		<Route path="/api-integration" controller={LessonAPIIntegration}/>
+		<Route path="/" exact component={LessonJSX}/>
+		<Route path="/elements" component={LessonElements}/>
+		<Route path="/comp-props" component={LessonCompProps}/>
+		<Route path="/lifecycle-hooks" component={LessonStateLifeHooks}/>
+		<Route path="/conditional-renders" component={LessonConditionalRenders}/>
+		<Route path="/state-lift-up" component={LessonStateLiftup}/>
+		<Route path="/container-presentational" component={LessonContainerPresentational}/>
+		<Route path="/user-data" component={LessonUserData}/>
+		<Route path="/api-integration" component={LessonAPIIntegration}/>
 	</Switch>
 );
